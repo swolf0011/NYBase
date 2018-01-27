@@ -1,0 +1,91 @@
+<resources>
+
+    <!--<dimen name="activity_horizontal_margin">16dp</dimen>-->
+    <!--<dimen name="activity_vertical_margin">16dp</dimen>-->
+
+
+    <dimen name="titleHeight">40dp</dimen>
+    <dimen name="titleMenuPadding">5dp</dimen>
+    <dimen name="titleMenuWidth">40dp</dimen>
+    <dimen name="titleMainTextSize">20sp</dimen>
+    <dimen name="titleTextSize">16sp</dimen>
+
+
+    <!-- dp -->
+    <dimen name="dp0">0dp</dimen>
+    <dimen name="dp1">1dp</dimen>
+    <dimen name="dp2">2dp</dimen>
+    <dimen name="dp3">3dp</dimen>
+    <dimen name="dp5">5dp</dimen>
+    <dimen name="dp8">8dp</dimen>
+    <dimen name="dp10">10dp</dimen>
+    <dimen name="dp12">12dp</dimen>
+    <dimen name="dp15">15dp</dimen>
+    <dimen name="dp16">16dp</dimen>
+    <dimen name="dp18">18dp</dimen>
+    <dimen name="dp20">20dp</dimen>
+    <dimen name="dp24">24dp</dimen>
+    <dimen name="dp30">30dp</dimen>
+    <dimen name="dp35">35dp</dimen>
+    <dimen name="dp40">40dp</dimen>
+    <dimen name="dp44">44dp</dimen>
+    <dimen name="dp48">48dp</dimen>
+    <dimen name="dp50">50dp</dimen>
+    <dimen name="dp60">60dp</dimen>
+    <dimen name="dp70">70dp</dimen>
+    <dimen name="dp80">80dp</dimen>
+    <dimen name="dp88">88dp</dimen>
+    <dimen name="dp90">90dp</dimen>
+    <dimen name="dp96">96dp</dimen>
+    <dimen name="dp100">100dp</dimen>
+    <dimen name="dp120">120dp</dimen>
+    <dimen name="dp150">150dp</dimen>
+    <dimen name="dp180">180dp</dimen>
+    <dimen name="dp200">200dp</dimen>
+    <dimen name="dp240">240dp</dimen>
+    <dimen name="dp300">300dp</dimen>
+    <dimen name="dp360">360dp</dimen>
+    <dimen name="dp400">400dp</dimen>
+    <dimen name="dp500">500dp</dimen>
+    <dimen name="dp600">600dp</dimen>
+    <dimen name="dp640">640dp</dimen>
+    <dimen name="dp800">800dp</dimen>
+    <dimen name="dp840">840dp</dimen>
+    <dimen name="dp1000">1000dp</dimen>
+
+
+    <!-- 文字 -->
+    <dimen name="sp4">4sp</dimen>
+    <dimen name="sp6">6sp</dimen>
+    <dimen name="sp8">8sp</dimen>
+    <dimen name="sp10">10sp</dimen>
+    <dimen name="sp12">12sp</dimen>
+    <dimen name="sp14">14sp</dimen>
+    <dimen name="sp16">16sp</dimen>
+    <dimen name="sp18">18sp</dimen>
+    <dimen name="sp20">20sp</dimen>
+    <dimen name="sp22">22sp</dimen>
+    <dimen name="sp30">30sp</dimen>
+    <dimen name="sp36">36sp</dimen>
+    <dimen name="sp40">40sp</dimen>
+    <dimen name="sp48">48sp</dimen>
+    <dimen name="sp50">50sp</dimen>
+    <dimen name="sp56">56sp</dimen>
+    <dimen name="sp60">60sp</dimen>
+    <dimen name="sp66">66sp</dimen>
+    <dimen name="sp70">70sp</dimen>
+    <dimen name="sp78">78sp</dimen>
+    <dimen name="sp80">80sp</dimen>
+    <dimen name="sp88">88sp</dimen>
+    <dimen name="sp90">90sp</dimen>
+    <dimen name="sp100">100sp</dimen>
+    <dimen name="sp120">120sp</dimen>
+    <dimen name="sp140">140sp</dimen>
+    <dimen name="sp160">160sp</dimen>
+    <dimen name="sp200">200sp</dimen>
+    <dimen name="sp240">240sp</dimen>
+    <dimen name="sp360">360sp</dimen>
+    <dimen name="sp400">400sp</dimen>
+    <dimen name="sp420">420sp</dimen>
+    <dimen name="sp480">480sp</dimen>
+</resources>
