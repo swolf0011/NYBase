@@ -1,25 +1,18 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.jakewharton.butterknife'
-//buildscript {
-//    repositories {
-//        mavenCentral()
-//        jcenter()
-//    }
-//
-//    dependencies {
-//        classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
-//    }
-//}
+
+
 android {
     compileSdkVersion 27
     buildToolsVersion "26.0.2"
 
+
     defaultConfig {
         minSdkVersion 21
-        //noinspection GradleCompatible
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+
+
     }
     buildTypes {
         release {
@@ -31,11 +24,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    //noinspection GradleCompatible
     compile 'com.android.support:appcompat-v7:27.+'
-    compile 'com.google.code.gson:gson:2.7'
-    //noinspection GradleCompatible
-    compile 'com.android.support:recyclerview-v7:27.+'
 
-
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 }

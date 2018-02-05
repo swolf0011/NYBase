@@ -1,0 +1,55 @@
+package com.swolf.libraryhttpokhttp.progress;
+
+import java.io.Serializable;
+
+/**
+ * 进度Model
+ * Created by LiuYi-15973602714
+ */
+public class NYProgressModel implements Serializable {
+  //当前读取字节长度
+  private long currentBytes;
+  //总字节长度
+  private long contentLength;
+  //是否读取完成
+  private boolean done;
+
+  public NYProgressModel(long currentBytes, long contentLength, boolean done) {
+    this.currentBytes = currentBytes;
+    this.contentLength = contentLength;
+    this.done = done;
+  }
+
+  public long getCurrentBytes() {
+    return currentBytes;
+  }
+
+  public void setCurrentBytes(long currentBytes) {
+    this.currentBytes = currentBytes;
+  }
+
+  public long getContentLength() {
+    return contentLength;
+  }
+
+  public void setContentLength(long contentLength) {
+    this.contentLength = contentLength;
+  }
+
+  public boolean isDone() {
+    return done;
+  }
+
+  public void setDone(boolean done) {
+    this.done = done;
+  }
+
+  @Override
+  public String toString() {
+    return "NYProgressModel{" +
+            "currentBytes=" + currentBytes +
+            ", contentLength=" + contentLength +
+            ", done=" + done +
+            '}';
+  }
+}

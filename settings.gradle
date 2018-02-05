@@ -1,1 +1,1 @@
-include ':app',':librarybase'
+include ':app', ':librarybase', ':libraryhttpokhttp', ':librarydbgreedao', ':libraryimgglide', ':libraryimgimageloader', ':librarydbormlite'

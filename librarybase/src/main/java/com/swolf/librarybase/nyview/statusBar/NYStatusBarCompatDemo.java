@@ -1,4 +1,4 @@
-package com.swolf.librarybase.statusBar;
+package com.swolf.librarybase.nyview.statusBar;
 
 import android.app.Activity;
 
