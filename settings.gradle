@@ -1,1 +1,1 @@
-include ':app', ':librarybase', ':libraryhttpokhttp', ':librarydbgreedao', ':libraryimgglide', ':libraryimgimageloader', ':librarydbormlite'
+include ':app', ':librarybase', ':libraryhttpokhttp', ':librarydbgreedao', ':libraryimgglide', ':libraryimgimageloader', ':librarydbormlite', ':librarybluetooth'

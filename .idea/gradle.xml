@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/librarybase" />
+            <option value="$PROJECT_DIR$/librarybluetooth" />
+            <option value="$PROJECT_DIR$/librarydbgreedao" />
+            <option value="$PROJECT_DIR$/librarydbormlite" />
+            <option value="$PROJECT_DIR$/libraryhttpokhttp" />
+            <option value="$PROJECT_DIR$/libraryimgglide" />
+            <option value="$PROJECT_DIR$/libraryimgimageloader" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

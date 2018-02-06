@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.swolf.librarybluetooth" >
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!--如果你想让你的应用程序只在低功耗蓝牙手机上工作，那你可以如下设置：required = true-->
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="false"/>
+
+
+</manifest>
