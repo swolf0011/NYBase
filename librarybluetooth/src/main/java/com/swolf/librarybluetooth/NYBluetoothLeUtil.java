@@ -26,14 +26,14 @@ import java.util.UUID;
  * Created by LiuYi-15973602714
  */
 @SuppressLint("NewApi")
-public class NYBluetoothLEUtil {
+public class NYBluetoothLeUtil {
     BluetoothAdapter mBluetoothAdapter;
     BluetoothLeScanner bluetoothLeScanner;
     BluetoothGatt mBluetoothGatt;
     Activity activity;
 
     @SuppressLint("WrongConstant")
-    public NYBluetoothLEUtil(Activity activity) {
+    public NYBluetoothLeUtil(Activity activity) {
         super();
         this.activity = activity;
         if (!activity.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
