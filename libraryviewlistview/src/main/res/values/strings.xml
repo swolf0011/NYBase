@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">LibraryViewListView</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+
+    <!-- refresh_list -->
+    <string name="ny_head_least_update">最近更新:</string>
+    <string name="ny_head_down_update_str">下拉刷新</string>
+    <string name="ny_head_waitting_update">正在刷新&#8230;</string>
+    <string name="ny_head_up_update">释放后刷新</string>
+    <string name="ny_footer_up_update">上拉刷新</string>
+    <string name="ny_footer_loading">正在加载&#8230;</string>
+</resources>

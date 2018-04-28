@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.swolf.libraryzxing">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name">
+        <activity android:name=".view.activity.NYMainActivity" />
+        <activity android:name=".view.activity.NYCreateCodeActivity" />
+        <activity android:name=".view.activity.NYScannerActivity" />
+    </application>
+
+</manifest>

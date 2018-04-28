@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">LibraryViewLockPattern</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+
+
+    <!-- lockpattern -->
+    <string name="ny_lockpattern_out_lockpattern_pwd">请输入手势密码</string>
+    <string name="ny_lockpattern_cancel">取消</string>
+    <string name="ny_lockpattern_try_again">重试</string>
+    <string name="ny_lockpattern_goon">继续</string>
+    <string name="ny_lockpattern_confirm">确认</string>
+    <string name="ny_lockpattern_recording_incorrect_too_short">"至少连接4个点，请重试"</string>
+    <string name="ny_lockpattern_error">"手势密码不对"</string>
+    <string name="ny_lockpattern_start">Pattern started</string>
+    <string name="ny_lockpattern_cleared">Pattern cleared</string>
+    <string name="ny_lockpattern_cell_added">Cell added</string>
+    <string name="ny_lockpattern_detected">Pattern completed</string>
+</resources>
