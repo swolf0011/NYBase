@@ -399,8 +399,6 @@ public class NYZip {
      * @param resFile  需要压缩的文件（夹）
      * @param zipout   压缩的目的文件
      * @param rootpath 压缩的文件路径
-     * @throws FileNotFoundException 找不到文件时抛出
-     * @throws IOException           当压缩过程出错时抛出
      */
     private void zipFile(File resFile, ZipOutputStream zipout, String rootpath)
             throws FileNotFoundException, IOException {
@@ -414,8 +412,7 @@ public class NYZip {
             }
         } else {
             byte buffer[] = new byte[BUFF_SIZE];
-            BufferedInputStream in = new BufferedInputStream(new FileInputStream(resFile),
-                    BUFF_SIZE);
+            BufferedInputStream in = new BufferedInputStream(new FileInputStream(resFile),BUFF_SIZE);
             zipout.putNextEntry(new ZipEntry(rootpath));
             int realLength;
             while ((realLength = in.read(buffer)) != -1) {
