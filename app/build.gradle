@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 27
     buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "base.ly.swolf.com.nybase"
@@ -11,13 +11,42 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    buildTypes {
+
+
+    signingConfigs {
+        debug {
+            keyAlias "android.keystore"
+            keyPassword "123456"
+            storeFile file("./keystore/android.keystore")
+            storePassword "123456"
+        }
         release {
-            minifyEnabled false
+            keyAlias "android.keystore"
+            keyPassword "123456"
+            storeFile file("./keystore/android.keystore")
+            storePassword "123456"
+            v2SigningEnabled false
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])

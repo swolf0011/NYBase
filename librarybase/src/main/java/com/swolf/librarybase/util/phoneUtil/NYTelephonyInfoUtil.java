@@ -15,13 +15,29 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
 
 /**
  * 手机信息工具
+ *  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+ *  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
  * Created by LiuYi-15973602714
  */
 public class NYTelephonyInfoUtil {
+
+    public class NYTelephonyInfo{
+        public String number;//手机号码
+        public String phoneModel;//手机型号
+        public String phoneManufacturer;//手机制造商
+        public String versionSDK;//SDK版本号
+        public String versionRelease;//系统版本号
+        public String imei;//获取设备的MIEI
+        public String android_id;//设备的android_id
+        public String imsi;//手机卡IMSI
+        public String providersName;//IMSI的中国提供商名
+        public String telephonySystem;//android系统/ophone
+    }
 
     /**
      * 获取手机号码
@@ -67,6 +83,10 @@ public class NYTelephonyInfoUtil {
     public static String getIMEI(Context cxt) {
         TelephonyManager tm = (TelephonyManager) cxt.getSystemService(Context.TELEPHONY_SERVICE);
         String imei = tm.getDeviceId();
+        if (TextUtils.isEmpty(imei)) {
+            //android.provider.Settings;
+            imei = Settings.Secure.getString(cxt.getContentResolver(), Settings.Secure.ANDROID_ID);
+        }
         tm = null;
         return imei;
     }

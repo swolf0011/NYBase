@@ -1,7 +1,9 @@
 package com.swolf.librarybase.baseView.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,13 +13,12 @@ import android.widget.TextView;
 
 import com.swolf.librarybase.R;
 
-
 /**
  * FragmentActivity基类
  * Created by LiuYi-15973602714 on 2017-01-01
  */
 public class NYBaseTitleFragmentActivity extends FragmentActivity {
-
+    private static final String tag = "NYBaseTitleFragmentActivity";
     /**
      * 本Activity
      */
@@ -31,6 +32,7 @@ public class NYBaseTitleFragmentActivity extends FragmentActivity {
     public TextView textView_right;
     public ImageView imageView_right;
 
+    @SuppressLint("LongLogTag")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,7 @@ public class NYBaseTitleFragmentActivity extends FragmentActivity {
 //        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);// 高亮显示
 
         activity = this;
+        Log.i(tag, "onCreate----" + activity.getClass().getSimpleName());
     }
 
 
@@ -116,4 +119,21 @@ public class NYBaseTitleFragmentActivity extends FragmentActivity {
 
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(tag, "onResume----" + activity.getClass().getSimpleName());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(tag, "onPause----" + activity.getClass().getSimpleName());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(tag, "onDestroy----" + activity.getClass().getSimpleName());
+    }
 }

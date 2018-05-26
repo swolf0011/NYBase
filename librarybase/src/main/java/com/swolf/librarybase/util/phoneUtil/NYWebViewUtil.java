@@ -9,6 +9,12 @@ import android.webkit.WebView;
  */
 public class NYWebViewUtil {
 
+    /**
+     *
+     * @param jsObject
+     * @param webView
+     * @param html
+     */
     @SuppressLint({"SetJavaScriptEnabled", "JavascriptInterface"})
     public static void loadHtml(Object jsObject, WebView webView, String html) {
         webView.getSettings().setJavaScriptEnabled(true);
