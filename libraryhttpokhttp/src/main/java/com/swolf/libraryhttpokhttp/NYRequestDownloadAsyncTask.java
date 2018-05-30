@@ -34,9 +34,9 @@ public class NYRequestDownloadAsyncTask extends AsyncTask<Void, Integer, Void> {
     private String filePath;
     private NYRequest.EMethod method;
     private NYProgressListener listener;
-    private NYOkHttpClient nyOkHttpClient = null;
+    private NYOkHttpSet nyOkHttpSet = null;
 
-    public NYRequestDownloadAsyncTask(NYOkHttpClient nyOkHttpClient,String serviceUrl,
+    public NYRequestDownloadAsyncTask(NYOkHttpSet nyOkHttpSet,String serviceUrl,
                                       HashMap<String, Object> paramMap,
                                       HashMap<String, String> headMap,
                                       String filePath,
@@ -44,7 +44,7 @@ public class NYRequestDownloadAsyncTask extends AsyncTask<Void, Integer, Void> {
                                       NYProgressListener listener) {
 
         super();
-        this.nyOkHttpClient = nyOkHttpClient;
+        this.nyOkHttpSet = nyOkHttpSet;
         this.serviceUrl = serviceUrl;
         this.paramMap = paramMap;
         this.headMap = headMap;
@@ -112,7 +112,7 @@ public class NYRequestDownloadAsyncTask extends AsyncTask<Void, Integer, Void> {
             file.delete();
         }
         try {
-            call = nyOkHttpClient.getOkHttpClient().newCall(request);
+            call = nyOkHttpSet.getOkHttpClient().newCall(request);
             final Response response = call.execute();
 
             is = response.body().byteStream();

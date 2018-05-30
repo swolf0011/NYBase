@@ -21,10 +21,10 @@ public class NYRequestStringAsyncTask extends AsyncTask<Void, Void, String> {
     private NYRequest.EMethod method;
     private NYIAsyncTaskCallback callback;
     private NYRequest request = null;
-    private NYOkHttpClient nyOkHttpClient = null;
+    private NYOkHttpSet nyOkHttpSet = null;
 
 
-    public NYRequestStringAsyncTask(NYOkHttpClient nyOkHttpClient,
+    public NYRequestStringAsyncTask(NYOkHttpSet nyOkHttpSet,
                                     String urlStr,
                                     String paramJson,
                                     HashMap<String, Object> paramMap,
@@ -33,7 +33,7 @@ public class NYRequestStringAsyncTask extends AsyncTask<Void, Void, String> {
                                     NYRequest.EMethod method,
                                     NYIAsyncTaskCallback callback) {
         super();
-        request = new NYRequest(nyOkHttpClient);
+        request = new NYRequest(nyOkHttpSet);
         init(urlStr, paramJson, paramMap, headMap, paramType, method, callback);
     }
     private void init(String urlStr,

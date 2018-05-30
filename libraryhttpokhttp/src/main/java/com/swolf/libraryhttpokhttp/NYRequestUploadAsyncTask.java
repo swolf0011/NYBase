@@ -35,13 +35,13 @@ public class NYRequestUploadAsyncTask extends AsyncTask<Void, Void, Call> {
     private String filePath;
     private Callback callback;
     private NYUIProgressRequestListener listener;
-    private NYOkHttpClient nyOkHttpClient = null;
+    private NYOkHttpSet nyOkHttpSet = null;
 
 
-    public NYRequestUploadAsyncTask(NYOkHttpClient nyOkHttpClient,String serviceUrl, HashMap<String, Object> paramMap, HashMap<String, String> headMap,
+    public NYRequestUploadAsyncTask(NYOkHttpSet nyOkHttpSet,String serviceUrl, HashMap<String, Object> paramMap, HashMap<String, String> headMap,
                                     String fileParamKey, String filePath, Callback callback, NYUIProgressRequestListener listener) {
         super();
-        this.nyOkHttpClient = nyOkHttpClient;
+        this.nyOkHttpSet = nyOkHttpSet;
         this.serviceUrl = serviceUrl;
         this.paramMap = paramMap;
         this.headMap = headMap;
@@ -90,7 +90,7 @@ public class NYRequestUploadAsyncTask extends AsyncTask<Void, Void, Call> {
                 .post(progressRequestBody)
                 .build();
 
-        Call call = nyOkHttpClient.getOkHttpClient().newCall(request);
+        Call call = nyOkHttpSet.getOkHttpClient().newCall(request);
         call.enqueue(callback);
         return call;
     }

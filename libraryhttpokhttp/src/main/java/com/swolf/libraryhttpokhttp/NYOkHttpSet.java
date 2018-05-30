@@ -3,9 +3,11 @@ package com.swolf.libraryhttpokhttp;
 
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -15,28 +17,30 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
+
 import static okhttp3.internal.Util.UTF_8;
+
 /**
  * Created by LiuYi-15973602714
  */
-public class NYOkHttpClient {
+public class NYOkHttpSet {
     private OkHttpClient okHttpClient;
     public OkHttpClient getOkHttpClient() {
         return okHttpClient;
     }
     private final String TAG = "NetWorkLogger";
 
-    public NYOkHttpClient() {
+    public NYOkHttpSet() {
         this(30 * 1000L, 60 * 3 * 1000L);
     }
 
-    public NYOkHttpClient(long connection_timeout_milliseconds, long read_timeout_milliseconds) {
+    public NYOkHttpSet(long connection_timeout_milliseconds, long read_timeout_milliseconds) {
         this(connection_timeout_milliseconds, read_timeout_milliseconds,null);
     }
-    public NYOkHttpClient(Interceptor[] interceptors) {
+    public NYOkHttpSet(Interceptor[] interceptors) {
         this(30 * 1000L, 60 * 3 * 1000L,interceptors);
     }
-    public NYOkHttpClient(long connection_timeout_milliseconds, long read_timeout_milliseconds, Interceptor[] interceptors) {
+    public NYOkHttpSet(long connection_timeout_milliseconds, long read_timeout_milliseconds, Interceptor[] interceptors) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(connection_timeout_milliseconds, TimeUnit.MILLISECONDS)
                 .readTimeout(read_timeout_milliseconds, TimeUnit.MILLISECONDS)
@@ -116,7 +120,6 @@ public class NYOkHttpClient {
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
             Response response = chain.proceed(request);
-
             String cacheControl = request.cacheControl().toString();
             if (TextUtils.isEmpty(cacheControl)) {
                 cacheControl = "public, max-age=" + 3600 * 6 + " ,max-stale=2419200";

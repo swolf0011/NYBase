@@ -28,10 +28,10 @@ public class NYRequest {
     }
 
     public MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");//mdiatype 这个需要和服务端保持一致
-    private NYOkHttpClient nyOkHttpClient;
+    private NYOkHttpSet nyOkHttpSet;
 
-    public NYRequest(NYOkHttpClient nyOkHttpClient) {
-        this.nyOkHttpClient = nyOkHttpClient;
+    public NYRequest(NYOkHttpSet nyOkHttpSet) {
+        this.nyOkHttpSet = nyOkHttpSet;
     }
 
 
@@ -78,7 +78,7 @@ public class NYRequest {
                 request = rBuilder.build();
                 break;
         }
-        Call call = nyOkHttpClient.getOkHttpClient().newCall(request);
+        Call call = nyOkHttpSet.getOkHttpClient().newCall(request);
         try {
             Response response = call.execute();
             if (response != null && response.isSuccessful()) {
@@ -139,7 +139,7 @@ public class NYRequest {
                 request = rBuilder.build();
                 break;
         }
-        Call call = nyOkHttpClient.getOkHttpClient().newCall(request);
+        Call call = nyOkHttpSet.getOkHttpClient().newCall(request);
         call.enqueue(callback);
         return call;
     }
