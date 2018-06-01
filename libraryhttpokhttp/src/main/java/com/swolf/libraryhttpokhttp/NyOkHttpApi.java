@@ -8,6 +8,7 @@ import android.util.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -18,8 +19,8 @@ import okhttp3.Response;
  * 网络API
  * Created by 刘一 on 20170324
  */
-public class NyOkHttpApi {
-    private static final String TAG = "NyOkHttpApi";
+public class NYOkHttpApi {
+    private static final String TAG = "NYOkHttpApi";
 
     //回调Handler
     public interface IHandlerCallback {
@@ -40,17 +41,17 @@ public class NyOkHttpApi {
      */
     private static Handler handler = new Handler(Looper.getMainLooper());
 
-    private static NyOkHttpApi okHttpApi;
+    private static NYOkHttpApi okHttpApi;
 
     private static class NYSubHolder {
-        private static NyOkHttpApi util = new NyOkHttpApi();
+        private static NYOkHttpApi util = new NYOkHttpApi();
     }
 
-    public static NyOkHttpApi getInstance() {
-        return NyOkHttpApi.NYSubHolder.util;
+    public static NYOkHttpApi getInstance() {
+        return NYOkHttpApi.NYSubHolder.util;
     }
 
-    private NyOkHttpApi() {
+    private NYOkHttpApi() {
     }
 
     /**
@@ -63,8 +64,7 @@ public class NyOkHttpApi {
                               NYRequest.EParamType paramType,
                               NYRequest.EMethod method) {
 
-        Log.d(TAG, "urlStr:" +urlStr);
-        Log.d(TAG, "paramJson:"+paramJson);
+        log(urlStr, paramJson, paramMap, headMap);
 
         return new NYRequest(new NYOkHttpSet()).request(urlStr, paramJson, paramMap, headMap, paramType, method);
     }
@@ -80,8 +80,7 @@ public class NyOkHttpApi {
                              NYRequest.EMethod method,
                              final IHandlerCallback handlerCallback) {
 
-        Log.d(TAG, "urlStr:" +urlStr);
-        Log.d(TAG, "paramJson:"+paramJson);
+        log(urlStr, paramJson, paramMap, headMap);
 
         new NYRequest(new NYOkHttpSet()).request(urlStr, paramJson, paramMap, headMap, paramType, method, new Callback() {
             @Override
@@ -112,4 +111,37 @@ public class NyOkHttpApi {
         });
     }
 
+
+    private void log(String urlStr, String paramJson, HashMap<String, Object> paramMap, HashMap<String, String> headMap) {
+        Log.d(TAG, "urlStr:" + urlStr);
+        Log.d(TAG, "paramJson:" + paramJson);
+        StringBuffer sb1 = new StringBuffer("{");
+        if (paramMap != null) {
+            for (Map.Entry<String, Object> entry : paramMap.entrySet()
+                    ) {
+
+                sb1.append(entry.getKey());
+                sb1.append(":");
+                sb1.append(entry.getValue());
+                sb1.append(",");
+            }
+        }
+        sb1.append("}");
+
+        Log.d(TAG, "paramMap:" + sb1.toString());
+
+        StringBuffer sb2 = new StringBuffer("{");
+        if (headMap != null) {
+            for (Map.Entry<String, String> entry : headMap.entrySet()
+                    ) {
+
+                sb2.append(entry.getKey());
+                sb2.append(":");
+                sb2.append(entry.getValue());
+                sb2.append(",");
+            }
+        }
+        sb2.append("}");
+        Log.d(TAG, "headMap:" + sb2.toString());
+    }
 }
