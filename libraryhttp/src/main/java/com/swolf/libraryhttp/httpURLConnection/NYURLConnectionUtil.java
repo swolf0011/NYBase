@@ -1,4 +1,4 @@
-package com.swolf.librarybase.http.httpURLConnection;
+package com.swolf.libraryhttp.httpURLConnection;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

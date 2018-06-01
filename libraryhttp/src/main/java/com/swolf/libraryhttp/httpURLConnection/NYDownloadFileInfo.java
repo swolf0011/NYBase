@@ -1,4 +1,4 @@
-package com.swolf.librarybase.http.httpURLConnection;
+package com.swolf.libraryhttp.httpURLConnection;
 
 /**
  * Created by LiuYi-15973602714

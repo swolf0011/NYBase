@@ -1,4 +1,4 @@
-package com.swolf.librarybase.http.httpURLConnection;
+package com.swolf.libraryhttp.httpURLConnection;
 
 import android.os.AsyncTask;
 
@@ -8,7 +8,7 @@ import java.util.HashMap;
  * 请求
  * Created by LiuYi-15973602714
  */
-public class NYRequestBytesAsyncTask extends AsyncTask<Void, Void, byte[]> {
+public class NYRequestStringAsyncTask extends AsyncTask<Void, Void, String> {
     // 后台服务接口地址
     private String serviceUrl;
     // 请求参数
@@ -25,11 +25,11 @@ public class NYRequestBytesAsyncTask extends AsyncTask<Void, Void, byte[]> {
      * @param requestMethod GET, POST, PATCH, DELETE, PUT, HEAD
      * @param callback
      */
-    public NYRequestBytesAsyncTask(String serviceUrl,
-                                   HashMap<String, Object> paramMap,
-                                   HashMap<String, String> heads,
-                                   String requestMethod,
-                                   NYIAsyncTaskCallback callback) {
+    public NYRequestStringAsyncTask(String serviceUrl,
+                                    HashMap<String, Object> paramMap,
+                                    HashMap<String, String> heads,
+                                    String requestMethod,
+                                    NYIAsyncTaskCallback callback) {
         super();
         this.serviceUrl = serviceUrl;
         this.paramMap = paramMap;
@@ -39,13 +39,13 @@ public class NYRequestBytesAsyncTask extends AsyncTask<Void, Void, byte[]> {
     }
 
     @Override
-    protected byte[] doInBackground(Void... voids) {
-        return NYURLConnectionUtil.getInstance().requestBytes(serviceUrl, paramMap, heads, requestMethod);
+    protected String doInBackground(Void... voids) {
+        return NYURLConnectionUtil.getInstance().requestStr(serviceUrl, paramMap, heads, requestMethod);
     }
 
     @Override
-    protected void onPostExecute(byte[] result) {
-        if (result != null && result.length > 0) {
+    protected void onPostExecute(String result) {
+        if (result != null && result.length() > 0) {
             callback.success(result);
         } else {
             callback.exception("网络异常，请检查网络连接！");
@@ -53,7 +53,7 @@ public class NYRequestBytesAsyncTask extends AsyncTask<Void, Void, byte[]> {
     }
 
     public interface NYIAsyncTaskCallback {
-        public void success(byte[] result);
+        public void success(String result);
 
         public void exception(String errerMsg);
     }
