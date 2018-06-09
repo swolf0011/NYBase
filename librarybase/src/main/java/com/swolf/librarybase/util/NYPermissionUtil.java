@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class NYPermissionUtil {
 
-    public final int PERMISSION_requestCode = 1000;
+//    public final int PERMISSION_requestCode = 1000;
 
     private static class NYSubHolder{
         private static NYPermissionUtil util = new NYPermissionUtil();
@@ -50,7 +50,7 @@ public class NYPermissionUtil {
      * @param permissions
      * @return
      */
-    public boolean checkSelfPermission2requestPermissions(Activity activity,String[] permissions) {
+    public boolean checkSelfPermission2requestPermissions(Activity activity,String[] permissions,int PERMISSION_requestCode) {
         boolean bool = true;
         List<String> list = new ArrayList<>();
         for (String str:permissions) {
@@ -97,9 +97,9 @@ public class NYPermissionUtil {
 
     public boolean onRequestPermissionsResult(int requestCode,
                                               String[] permissions,
-                                              int[] grantResults,int REQUEST_CODE) {
+                                              int[] grantResults,int PERMISSION_requestCode) {
         boolean isGrantedAll = true;
-        if (requestCode == REQUEST_CODE) {
+        if (requestCode == PERMISSION_requestCode) {
             for (int grantResult : grantResults) {
                 if (grantResult != PackageManager.PERMISSION_GRANTED) {
                     isGrantedAll = false;

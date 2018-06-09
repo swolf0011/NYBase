@@ -127,6 +127,34 @@ public class NYFileUtil {
         return result.toString();
     }
 
+    /**
+     * readString
+     */
+    public static String readString(InputStream is) {
+        StringBuffer result = new StringBuffer("");
+        try {
+            if (is != null) {
+                byte buffer[] = new byte[4 * 1024];
+                int length = -1;
+                while ((length = is.read(buffer)) != -1) {
+                    result.append(new String(buffer, 0, length, "UTF-8"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (is != null) {
+                    is.close();
+                    is = null;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result.toString();
+    }
+
     private void closeInputStream(InputStream inputStream){
         try {
             if (inputStream != null) {

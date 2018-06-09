@@ -56,7 +56,6 @@ public class NYPickPhotoPopupWindow {
      *
      * @param authority "{项目包名}.fileprovider";
      */
-//    private static String AUTHORITY = "com.yunkanghealth.ykservice.fileprovider";
 
     /**
      * 相册

@@ -210,6 +210,7 @@
             android:name=".receiver.NYHomeKeyReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
+
     </application>
 
 </manifest>

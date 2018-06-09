@@ -12,8 +12,6 @@ apply plugin: 'com.android.library'
 //}
 android {
     compileSdkVersion 27
-    buildToolsVersion "26.0.2"
-
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 27
@@ -32,7 +30,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     //noinspection GradleCompatible
     compile 'com.android.support:appcompat-v7:27.+'
-    compile 'com.google.code.gson:gson:2.7'
     //noinspection GradleCompatible
     compile 'com.android.support:recyclerview-v7:27.+'
 
