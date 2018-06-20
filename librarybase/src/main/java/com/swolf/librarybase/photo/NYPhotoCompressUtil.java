@@ -77,7 +77,7 @@ public class NYPhotoCompressUtil {
 
     public static Bitmap bitmapToBitmap(Bitmap bitmap, CompressFormat cf, int new_size) {
         byte[] bs = bitmapToBytes(bitmap, cf, new_size);
-        return NYPhotoTransformationUtil.bytesToBitmap(bs);
+        return BitmapFactory.decodeByteArray(bs, 0, bs.length);
     }
 
 

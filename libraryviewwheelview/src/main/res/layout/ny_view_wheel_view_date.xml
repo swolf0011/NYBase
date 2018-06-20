@@ -5,19 +5,19 @@
               android:orientation="horizontal">
 
 
-    <com.ly.libraryviewwheelview.wheelview.WheelView
+    <com.swolf.libraryviewwheelview.wheelview.WheelView
         android:id="@+id/wheelViewYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
 
-    <com.ly.libraryviewwheelview.wheelview.WheelView
+    <com.swolf.libraryviewwheelview.wheelview.WheelView
         android:id="@+id/wheelViewMonth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
 
-    <com.ly.libraryviewwheelview.wheelview.WheelView
+    <com.swolf.libraryviewwheelview.wheelview.WheelView
         android:id="@+id/wheelViewDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -23,8 +23,7 @@
             android:layout_weight="1"
             android:gravity="right"
             android:orientation="horizontal" >
-
-            <ccom.swolf.libraryviewlistview.listview.NYEmptyCircleView
+            <com.swolf.libraryviewlistview.osRefreshListView.NYEmptyCircleView
                 android:id="@+id/base_xsp_view_006_refresh_list_header_emptyCircleView"
                 android:layout_width="25dp"
                 android:layout_height="25dp" />
