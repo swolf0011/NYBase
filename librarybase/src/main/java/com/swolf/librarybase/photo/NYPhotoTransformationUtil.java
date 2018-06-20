@@ -71,10 +71,7 @@ public class NYPhotoTransformationUtil {
      */
     public Bitmap fileToBitmap(String filePath) {
         if (NYFileUtil.getInstance().isFileExist(filePath)) {
-            BitmapFactory.Options newOpts = new BitmapFactory.Options();
-            newOpts.inJustDecodeBounds = true;// begin set is true;
-            Bitmap bitmap = BitmapFactory.decodeFile(filePath, newOpts);
-            newOpts.inJustDecodeBounds = false;// set is true;
+            Bitmap bitmap = BitmapFactory.decodeFile(filePath);
             return bitmap;
         }
         return null;

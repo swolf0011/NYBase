@@ -20,17 +20,17 @@ public class NYPhotoCompressUtil {
     /**
      * 调整大小图片，放大或缩小图片
      */
-    public static Bitmap resizeImage(Bitmap bitmap, int w, int h) {
-        Bitmap bitmapOrg = bitmap;
-        int width = bitmapOrg.getWidth();
-        int height = bitmapOrg.getHeight();
-        int newWidth = w;
-        int newHeight = h;
+    public static Bitmap resizeImage(Bitmap bitmap, int newWidth, int newHeight) {
+        if (bitmap == null || bitmap.getWidth() == 0 || bitmap.getHeight() == 0) {
+            return null;
+        }
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
         float scaleWidth = ((float) newWidth) / width;
         float scaleHeight = ((float) newHeight) / height;
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleHeight);
-        Bitmap b = Bitmap.createBitmap(bitmapOrg, 0, 0, width, height, matrix, true);
+        Bitmap b = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
         return b;
     }
 
@@ -80,62 +80,8 @@ public class NYPhotoCompressUtil {
         return BitmapFactory.decodeByteArray(bs, 0, bs.length);
     }
 
-
-    /**
-     * 压缩指定宽高图片到指定大小到文件
-     *
-     * @param filePath
-     * @param cf       枚举：
-     *                 CompressFormat.JPEG;
-     *                 CompressFormat.PNG;
-     *                 CompressFormat.WEBP;
-     * @param n_w
-     * @param n_h
-     * @return
-     */
-    public static byte[] imageFilePathToBytes(String filePath, CompressFormat cf, int n_w, int n_h) {
-        byte[] bs = null;
-        Bitmap bitmap = imageFilePathToBitmap(filePath, cf, n_w, n_h);
-        int quality = 100; // 100:not compress
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(cf, quality, baos);
-        bs = baos.toByteArray();
-        if (baos != null) {
-            try {
-                baos.flush();
-                baos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        bitmap.recycle();
-        return bs;
-
-    }
-
-    public static Bitmap imageFilePathToBitmap(String filePath, CompressFormat cf, int n_w, int n_h) {
-        BitmapFactory.Options newOpts = new BitmapFactory.Options();
-        newOpts.inJustDecodeBounds = true;// begin set is true;
-        Bitmap bitmap = BitmapFactory.decodeFile(filePath, newOpts);
-        newOpts.inJustDecodeBounds = false;// set is true;
-
-        int w = newOpts.outWidth;
-        int h = newOpts.outHeight;
-
-        int inSampleSize = 1;// 1:not compress
-        if (w > h && w > n_w) {
-            inSampleSize = (int) (newOpts.outWidth / n_w);
-        } else if (w < h && h > n_h) {
-            inSampleSize = (int) (newOpts.outHeight / n_h);
-        }
-        if (inSampleSize <= 0) {
-            inSampleSize = 1;
-        }
-        newOpts.inSampleSize = inSampleSize;
-        newOpts.inPreferredConfig = Config.ARGB_8888;// 该模式是默认的,可不设
-        // newOpts.inPurgeable = true;// 同时设置才会有效
-        // newOpts.inInputShareable = true;// 。当系统内存不够时候图片自动被回收
-        bitmap = BitmapFactory.decodeFile(filePath, newOpts);
+    public static Bitmap imageFilePathToBitmap(String filePath) {
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
         return bitmap;
     }
 }
