@@ -156,11 +156,11 @@ public class NYOkHttpApi {
      * @return
      */
     public void uploadAsync(String urlStr, HashMap<String, String> headMap,
-                            String filePath, NYUIProgressRequestListener listener,
+                            String filePath,
                             final IHandlerCallback handlerCallback) {
         log(urlStr, null, null, headMap);
 
-        new NYRequest(new NYOkHttpSet()).uploadAsync(urlStr, headMap, filePath, listener, new Callback() {
+        new NYRequest(new NYOkHttpSet()).uploadAsync(urlStr, headMap, filePath,  new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
                 if (handlerCallback != null) {

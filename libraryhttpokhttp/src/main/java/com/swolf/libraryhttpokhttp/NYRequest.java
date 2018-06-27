@@ -157,18 +157,16 @@ public class NYRequest {
      * @param urlStr
      * @param headMap
      * @param filePath
-     * @param listener
      * @return
      */
     public Call uploadAsync(String urlStr, HashMap<String, String> headMap,
-                            String filePath, NYUIProgressRequestListener listener, Callback callback) {
+                            String filePath,  Callback callback) {
         File file = new File(filePath);
-        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
         Request.Builder rBuilder = new Request.Builder().url(urlStr);
         new NYRequestParamsUtil().setHead(rBuilder, headMap);
-        NYProgressRequestBody progressRequestBody = NYProgressHelper.addProgressRequestListener(fileBody, listener);
         Request request = new Request.Builder().url(urlStr)
-                .post(progressRequestBody).build();
+                .post(requestBody).build();
         Call call = nyOkHttpSet.getOkHttpClient().newCall(request);
         call.enqueue(callback);
         return call;
