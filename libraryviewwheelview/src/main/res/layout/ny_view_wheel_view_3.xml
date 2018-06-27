@@ -10,7 +10,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <com.ly.libraryviewwheelview.wheelview.WheelView
+        <com.swolf.libraryviewwheelview.wheelview.WheelView
             android:id="@+id/wheelView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <com.ly.libraryviewwheelview.wheelview.WheelView
+        <com.swolf.libraryviewwheelview.wheelview.WheelView
             android:id="@+id/wheelView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -35,7 +35,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <com.ly.libraryviewwheelview.wheelview.WheelView
+        <com.swolf.libraryviewwheelview.wheelview.WheelView
             android:id="@+id/wheelView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

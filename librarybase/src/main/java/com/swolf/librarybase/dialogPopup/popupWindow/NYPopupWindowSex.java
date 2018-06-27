@@ -34,7 +34,7 @@ public class NYPopupWindowSex {
             public void onClick(View arg0) {
                 pop.dismiss();
                 if (callback != null) {
-                    callback.female("男");
+                    callback.female("女");
                 }
             }
         });
@@ -43,7 +43,7 @@ public class NYPopupWindowSex {
             public void onClick(View arg0) {
                 pop.dismiss();
                 if (callback != null) {
-                    callback.male("女");
+                    callback.male("男");
                 }
             }
         });

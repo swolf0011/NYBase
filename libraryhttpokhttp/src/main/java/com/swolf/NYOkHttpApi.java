@@ -1,18 +1,18 @@
 package com.swolf.libraryhttpokhttp;
 
-import android.os.Environment;
+
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import java.io.File;
+import com.swolf.libraryhttpokhttp.progress.NYUIProgressRequestListener;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 /**
@@ -143,5 +143,95 @@ public class NYOkHttpApi {
         }
         sb2.append("}");
         Log.d(TAG, "headMap:" + sb2.toString());
+    }
+
+
+
+    /**
+     * @param urlStr
+     * @param headMap
+     * @param filePath
+     * @param listener
+     * @param handlerCallback
+     * @return
+     */
+    public void uploadAsync(String urlStr, HashMap<String, String> headMap,
+                            String filePath, NYUIProgressRequestListener listener,
+                            final IHandlerCallback handlerCallback) {
+        log(urlStr, null, null, headMap);
+
+        new NYRequest(new NYOkHttpSet()).uploadAsync(urlStr, headMap, filePath, listener, new Callback() {
+            @Override
+            public void onFailure(Call call, final IOException e) {
+                if (handlerCallback != null) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            handlerCallback.onFailure(e, "请求超时!");
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String result = response.body().string();
+                Log.d(TAG, "response:" + result);
+                if (handlerCallback != null) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            handlerCallback.onResponse(result);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+
+    /**
+     * @param urlStr
+     * @param paramMap
+     * @param headMap
+     * @param fileParamKey    与服务器保持一致
+     * @param filePath
+     * @param handlerCallback
+     * @return
+     */
+    public void uploadAsync(final String urlStr, final HashMap<String, Object> paramMap, final HashMap<String, String> headMap,
+                            final String fileParamKey, final String filePath,
+                            final IHandlerCallback handlerCallback) {
+        log(urlStr, null, paramMap, headMap);
+
+
+        new NYRequest(new NYOkHttpSet()).uploadAsync(urlStr, paramMap, headMap, fileParamKey, filePath, new Callback() {
+            @Override
+            public void onFailure(Call call, final IOException e) {
+                if (handlerCallback != null) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            handlerCallback.onFailure(e, "请求超时!");
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String result = response.body().string();
+                Log.d(TAG, "response:" + result);
+                if (handlerCallback != null) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            handlerCallback.onResponse(result);
+                        }
+                    });
+                }
+            }
+        });
+
     }
 }

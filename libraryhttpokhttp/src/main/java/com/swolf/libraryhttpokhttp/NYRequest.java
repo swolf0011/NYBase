@@ -1,16 +1,23 @@
 package com.swolf.libraryhttpokhttp;
 
 
-
+import com.swolf.libraryhttpokhttp.progress.NYProgressHelper;
+import com.swolf.libraryhttpokhttp.progress.NYProgressRequestBody;
+import com.swolf.libraryhttpokhttp.progress.NYUIProgressRequestListener;
 import com.swolf.libraryhttpokhttp.util.NYRequestParamsUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.Headers;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -23,6 +30,7 @@ public class NYRequest {
     public enum EParamType {
         JSONStr, MAP
     }
+
     public enum EMethod {
         GET, POST, PATCH, DELETE, PUT, HEAD
     }
@@ -143,5 +151,68 @@ public class NYRequest {
         call.enqueue(callback);
         return call;
     }
+
+
+    /**
+     * @param urlStr
+     * @param headMap
+     * @param filePath
+     * @param listener
+     * @return
+     */
+    public Call uploadAsync(String urlStr, HashMap<String, String> headMap,
+                            String filePath, NYUIProgressRequestListener listener, Callback callback) {
+        File file = new File(filePath);
+        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
+        Request.Builder rBuilder = new Request.Builder().url(urlStr);
+        new NYRequestParamsUtil().setHead(rBuilder, headMap);
+        NYProgressRequestBody progressRequestBody = NYProgressHelper.addProgressRequestListener(fileBody, listener);
+        Request request = new Request.Builder().url(urlStr)
+                .post(progressRequestBody).build();
+        Call call = nyOkHttpSet.getOkHttpClient().newCall(request);
+        call.enqueue(callback);
+        return call;
+    }
+
+
+    /**
+     * @param urlStr
+     * @param paramMap
+     * @param headMap
+     * @param fileParamKey 与服务器保持一致
+     * @param filePath
+     * @return
+     */
+
+    public Call uploadAsync(String urlStr, HashMap<String, Object> paramMap, HashMap<String, String> headMap,
+                            String fileParamKey, String filePath, Callback callback) {
+
+        File file = new File(filePath);
+        String filename = file.getName();
+
+
+        /**
+         * 上传文件格式
+         */
+        RequestBody fileBody = MultipartBody.create(MediaType.parse("application/octet-stream"), file);//将file转换成RequestBody文件
+        MultipartBody.Builder fbBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        if (paramMap != null) {
+            for (Map.Entry<String, Object> en : paramMap.entrySet()) {
+                fbBuilder.addFormDataPart(en.getKey(), en.getValue() + "");
+            }
+        }
+        RequestBody requestBody = fbBuilder.addFormDataPart(fileParamKey, filename, fileBody).build();
+
+        Request.Builder rBuilder = new Request.Builder();
+        new NYRequestParamsUtil().setHead(rBuilder, headMap);
+
+        Request request = rBuilder.url(urlStr).post(requestBody).build();
+        Call call = nyOkHttpSet.getOkHttpClient().newCall(request);
+        call.enqueue(callback);
+        return call;
+
+
+    }
+
 
 }

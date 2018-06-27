@@ -17,21 +17,23 @@ import com.swolf.librarybase.R;
 public class NYPopupWindowContent {
 
 
-    public void show(Context context, View clickParentView, String title,
+    public void show(Context context, View clickParentView, View contentView, String title,
                      final IHandlerCallback callback, OnDismissListener listener) {
         final NYPopupWindowUtil pop = new NYPopupWindowUtil();
         View view = LayoutInflater.from(context).inflate(R.layout.ny_popupwindow_content, null);
         TextView tv_cancel = (TextView) view.findViewById(R.id.tv_cancel);
         TextView tv_title = (TextView) view.findViewById(R.id.tv_title);
         TextView tv_confirm = (TextView) view.findViewById(R.id.tv_confirm);
+        LinearLayout ll_content = (LinearLayout) view.findViewById(R.id.ll_content);
         tv_title.setText(title);
+        ll_content.removeAllViews();
+        ll_content.addView(contentView);
 
         tv_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-
                 pop.dismiss();
-                if (callback != null) {
+                if (callback != null) { callback.cancel();
                 }
             }
         });
@@ -41,6 +43,7 @@ public class NYPopupWindowContent {
                 pop.dismiss();
 
                 if (callback != null) {
+                    callback.confirm();
                 }
             }
         });
@@ -56,9 +59,9 @@ public class NYPopupWindowContent {
 
 
     public interface IHandlerCallback {
-        void cancel(String val);
+        void cancel();
 
-        void confirm(String female);
+        void confirm();
     }
 
 }
