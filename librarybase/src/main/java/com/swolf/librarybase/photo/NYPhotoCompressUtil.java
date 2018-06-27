@@ -15,7 +15,29 @@ import java.io.ByteArrayOutputStream;
 public class NYPhotoCompressUtil {
 
     /**
+<<<<<<< HEAD
      * 压缩图片
+=======
+     * 调整大小图片，放大或缩小图片
+     */
+    public static Bitmap resizeImage(Bitmap bitmap, int newWidth, int newHeight) {
+        if (bitmap == null || bitmap.getWidth() == 0 || bitmap.getHeight() == 0) {
+            return null;
+        }
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap b = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+        return b;
+    }
+
+
+    /**
+     * 压缩图片2文件
+>>>>>>> 883f88950c738192f6efd36217b27db4cefdd920
      *
      * @param bitmap
      * @param new_size       新大小，单位是KB。不能<=0
@@ -37,6 +59,7 @@ public class NYPhotoCompressUtil {
         return baos.toByteArray();
     }
 
+<<<<<<< HEAD
     /**
      * 压缩图片
      *
@@ -74,6 +97,15 @@ public class NYPhotoCompressUtil {
         options.inSampleSize = inSampleSize;
         options.inPreferredConfig = rgb_565;// 该模式是默认的,可不设
         bitmap = BitmapFactory.decodeFile(filePath, options);
+=======
+    public static Bitmap bitmapToBitmap(Bitmap bitmap, CompressFormat cf, int new_size) {
+        byte[] bs = bitmapToBytes(bitmap, cf, new_size);
+        return BitmapFactory.decodeByteArray(bs, 0, bs.length);
+    }
+
+    public static Bitmap imageFilePathToBitmap(String filePath) {
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+>>>>>>> 883f88950c738192f6efd36217b27db4cefdd920
         return bitmap;
     }
 

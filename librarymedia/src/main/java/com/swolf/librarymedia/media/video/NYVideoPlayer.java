@@ -9,7 +9,7 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.view.SurfaceHolder;
 
 /**
- * 播放音乐
+ * 播放视频
  * <!—sd卡写入权限-->
  * <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
  * <uses-permission android:name="android.permission.WRITE_SETTINGS" />
