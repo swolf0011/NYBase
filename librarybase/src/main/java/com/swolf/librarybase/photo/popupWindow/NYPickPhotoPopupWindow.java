@@ -215,7 +215,7 @@ public class NYPickPhotoPopupWindow {
                 return;
             }
             //打开相册
-            Intent intent = new Intent("android.intent.action.GET_CONTENT");
+            Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             activity.startActivityForResult(intent, requestCode);
 
