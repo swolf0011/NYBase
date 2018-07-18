@@ -1,7 +1,5 @@
 package com.swolf.librarybase.util;
 
-import android.content.Context;
-
 import java.io.UnsupportedEncodingException;
 
 /**

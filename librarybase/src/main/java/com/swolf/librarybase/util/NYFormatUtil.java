@@ -10,17 +10,25 @@ import java.text.DecimalFormat;
  */
 @SuppressLint("DefaultLocale")
 public class NYFormatUtil {
-    private static class NYSubHolder{
+    private static class NYSubHolder {
         private static NYFormatUtil util = new NYFormatUtil();
     }
-    private NYFormatUtil(){
+
+    private NYFormatUtil() {
     }
-    public static NYFormatUtil getInstance(){
+
+    public static NYFormatUtil getInstance() {
         return NYFormatUtil.NYSubHolder.util;
     }
 
     public static String money_prefix = "￥";
 
+    /**
+     * m和km格式距离
+     *
+     * @param distance
+     * @return
+     */
     public String formatDistance(float distance) {
         if (distance >= 1000) {
             if (distance % 1000 == 0) {
@@ -35,23 +43,29 @@ public class NYFormatUtil {
         }
     }
 
-    public String formatMoney(double distance) {
-        DecimalFormat df = new DecimalFormat("#,##0.00");
-        return money_prefix + " " + df.format(distance);
-    }
-
     /**
-     * 格式化Double为Money
+     * 格式钱币 money_prefix+"#,##0.00"
+     *
+     * @param distance
+     * @param money_prefix
+     * @return
      */
-    public String format2Money(Double d) {
-        return new DecimalFormat("###,###,###,###.##").format(d);
+    public String formatMoney(double distance, String money_prefix) {
+        return money_prefix +  new DecimalFormat("#,##0.00").format(distance);
     }
 
     /**
-     * 转换成模糊查询的字符串
+     * 格式化Double为Money "###,###,###,###.##"
+     */
+    public String formatMoney(double distance) {
+        return new DecimalFormat("###,###,###,###.##").format(distance);
+    }
+
+    /**
+     * 转换成模糊查询的字符串 %xx%
      */
     public String convertToSQLLikeStr(String val) {
-        return "%" + val.trim().toUpperCase() + "%";
+        return "%" + val.trim() + "%";
     }
 
     /**

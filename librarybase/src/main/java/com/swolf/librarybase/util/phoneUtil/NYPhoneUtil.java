@@ -1,5 +1,6 @@
 package com.swolf.librarybase.util.phoneUtil;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,23 +16,11 @@ import java.util.Enumeration;
  * Created by LiuYi-15973602714
  */
 public class NYPhoneUtil {
-    /**
-     * 安装APK文件
-     */
-    public static void installApk(Context context, String filePath1) {
-        File apkfile = new File(filePath1);
-        if (!apkfile.exists()) {
-            return;
-        }
-        // 通过Intent安装APK文件
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.parse("file://" + apkfile.toString()), "application/vnd.android.package-archive");
-        context.startActivity(intent);
-    }
 
     /**
      * 拨打电话
      */
+    @SuppressLint("MissingPermission")
     public static void call(Context context, String number) {
         String uri = "tel:" + number;
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(uri));

@@ -48,7 +48,8 @@ public class NYVerifyUtil {
      * 校验手机号
      */
     public boolean isMobile(String mobile) {
-        String REGEX_MOBILE = "^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+//        String REGEX_MOBILE = "^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+        String REGEX_MOBILE = "^1\\d{10}$";
         return Pattern.matches(REGEX_MOBILE, mobile);
     }
 
@@ -76,7 +77,7 @@ public class NYVerifyUtil {
      * 校验用户名
      */
     public boolean isUsername(String username) {
-        String REGEX_USERNAME = "^[a-zA-Z]\\w{5,17}$";
+        String REGEX_USERNAME = "^[a-zA-Z]\\w{5,20}$";
         return Pattern.matches(REGEX_USERNAME, username);
     }
 
@@ -84,12 +85,12 @@ public class NYVerifyUtil {
      * 校验密码
      */
     public boolean isPassword(String password) {
-        String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,16}$";
+        String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,20}$";
         return Pattern.matches(REGEX_PASSWORD, password);
     }
 
     /**
-     * 校验邮箱
+     * 验证是否为邮箱
      */
     public boolean isEmail(String email) {
         String REGEX_EMAIL = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";

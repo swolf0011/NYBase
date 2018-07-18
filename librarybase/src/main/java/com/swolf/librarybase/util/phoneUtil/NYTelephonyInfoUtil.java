@@ -1,5 +1,6 @@
 package com.swolf.librarybase.util.phoneUtil;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -44,7 +45,7 @@ public class NYTelephonyInfoUtil {
      */
     public static String getPhoneNumber(Context cxt) {
         TelephonyManager tm = (TelephonyManager) cxt.getSystemService(Context.TELEPHONY_SERVICE);
-        String number = tm.getLine1Number();
+        @SuppressLint("MissingPermission") String number = tm.getLine1Number();
         tm = null;
         return number;
     }
@@ -82,7 +83,7 @@ public class NYTelephonyInfoUtil {
      */
     public static String getIMEI(Context cxt) {
         TelephonyManager tm = (TelephonyManager) cxt.getSystemService(Context.TELEPHONY_SERVICE);
-        String imei = tm.getDeviceId();
+        @SuppressLint("MissingPermission") String imei = tm.getDeviceId();
         if (TextUtils.isEmpty(imei)) {
             //android.provider.Settings;
             imei = Settings.Secure.getString(cxt.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -103,7 +104,7 @@ public class NYTelephonyInfoUtil {
      */
     public static String getIMSI(Context cxt) {
         TelephonyManager tm = (TelephonyManager) cxt.getSystemService(Context.TELEPHONY_SERVICE);
-        String imsi = tm.getSubscriberId();
+        @SuppressLint("MissingPermission") String imsi = tm.getSubscriberId();
         tm = null;
         return imsi;
     }
