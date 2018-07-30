@@ -39,7 +39,6 @@ public class NYOSRefreshListViewDemo extends Activity {
     public void getNetDate() {
         refreshListViewUtil.setPage_currentPage(1);
         refreshListViewUtil.setPage_uploadState(1);
-
 //		getMyCusEmp(this, refreshListViewUtil.getPage_currentPage(), pagesize, "", "");
     }
 
@@ -60,8 +59,7 @@ public class NYOSRefreshListViewDemo extends Activity {
 //					@Override
 //					public void success(Resp<RespDataGetMyCusEmp> resp) {
 //						NYLoadingDialog.dismissLoadingDialog();
-//						
-//						
+//						refreshListViewUtil.refreshListViewOnComplete();
 //						// 1为下拉刷新,清空之前的数据
 //						if (refreshListViewUtil.getPage_uploadState() == 1) {
 //							list.clear();
@@ -70,23 +68,14 @@ public class NYOSRefreshListViewDemo extends Activity {
 //							list.addAll(resp.data.recs);
 //							refreshListViewUtil.setOnLoadMoreListener(resp.data.sumpage);
 //						}
-
 //						adapter.notifyDataSetChanged();
-
-//						refreshListViewUtil.setOnRefreshListener();
-//						refreshListViewUtil.refreshListViewOnComplete();
 //					}
-//
 //					@Override
 //					public void exception(String errerMsg) {
 //						NYLoadingDialog.dismissLoadingDialog();
 //						NYToastUtil.show(activity, errerMsg);
-//						
-//						
 //						refreshListViewUtil.refreshListViewOnComplete();
 //					}
 //				});
     }
-
-
 }
