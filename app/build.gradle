@@ -48,7 +48,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
-        def date = new Date().format("MMdd")
+        def date = new Date().format("yyyyMMddHHmmss")
         applicationVariants.all { variant ->
             variant.outputs.all {
                 outputFileName = "Dcampus_v${defaultConfig.versionName}_${date}_${variant.buildType.name}.apk"
