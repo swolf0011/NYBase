@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:27.+'
-    compile 'net.duguying.pinyin:pinyin:0.0.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.+'
+    implementation 'net.duguying.pinyin:pinyin:0.0.1'
 }

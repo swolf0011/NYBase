@@ -23,9 +23,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:27.+'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.+'
 
-    compile 'com.google.zxing:core:3.3.0'
-    compile 'com.mylhyl:zxingscanner:2.0.3'
+    implementation 'com.google.zxing:core:3.3.0'
+    implementation 'com.mylhyl:zxingscanner:2.0.3'
 }

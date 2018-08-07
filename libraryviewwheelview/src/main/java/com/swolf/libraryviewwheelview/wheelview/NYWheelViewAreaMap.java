@@ -4,11 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-
-import com.google.gson.reflect.TypeToken;
-import com.swolf.librarygson.NYGsonParser;
 import com.swolf.libraryviewwheelview.R;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,42 +22,30 @@ public class NYWheelViewAreaMap {
     public interface INYWheelView3Hander {
         public void onChanging(String value1, String value2, String value3);
     }
-
-    List<String[]> strsList2 = new ArrayList<>();
-    List<List<String[]>> strsList3 = new ArrayList<>();
-
-
+    private Map<String, Map<String, String[]>> areaMap;
+    private String value1;
+    private String value2;
+    private String value3;
     private String[] values1 = {};
     private String[] values2 = {};
     private String[] values3 = {};
+    private WheelView wheelView1;
+    private WheelView wheelView2;
+    private WheelView wheelView3;
+    private INYWheelView3Hander hander;
+    private int index1 = 0;
+    private int index2 = 0;
+    private int index3 = 0;
 
-    int index1 = 0;
-    int index2 = 0;
-    int index3 = 0;
-
-    WheelView wheelView1;
-    WheelView wheelView2;
-    WheelView wheelView3;
-
-    String value1;
-    String value2;
-    String value3;
-
-    INYWheelView3Hander hander;
-
-    Map<String, Map<String, String[]>> areaMap;
-
-    public NYWheelViewAreaMap(Context context, String areaJsonObject,
+    public NYWheelViewAreaMap(Context context, Map<String, Map<String, String[]>> areaMap,
                               String v1, String v2, String v3, INYWheelView3Hander hander) {
-        parserArea(areaJsonObject);
+        this.areaMap = areaMap;
         this.value1 = v1;
         this.value2 = v2;
         this.value3 = v3;
-
         this.values1 = v1s();
         this.values2 = v2s(v1);
         this.values3 = v3s(v1, v2);
-
         view = LayoutInflater.from(context).inflate(R.layout.ny_view_wheel_view_3, null);
         this.wheelView1 = (WheelView) view.findViewById(R.id.wheelView1);
         this.wheelView2 = (WheelView) view.findViewById(R.id.wheelView2);
@@ -111,24 +95,13 @@ public class NYWheelViewAreaMap {
         return null;
     }
 
-    private void parserArea(String areaJson) {
-        try {
-            areaMap = NYGsonParser.jsonStr2Object(areaJson, new TypeToken<Map<String, Map<String, String[]>>>() {
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * 如果UI显示有出问题，可以在Activity的onResume()中调用。
      */
     public void resume() {
-
         initWheelView1();
         initWheelView2();
         initWheelView3();
-
         setWheelViewChangingListener();
     }
 

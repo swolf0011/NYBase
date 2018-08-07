@@ -5,8 +5,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.google.gson.reflect.TypeToken;
-import com.swolf.librarygson.NYGsonParser;
 import com.swolf.libraryviewwheelview.R;
 
 import java.util.ArrayList;
@@ -26,59 +24,36 @@ public class NYWheelViewAreaList {
     public interface INYWheelView3Hander {
         public void onChanging(String value1, String value2, String value3);
     }
-
-    List<String[]> strsList2 = new ArrayList<>();
-    List<List<String[]>> strsList3 = new ArrayList<>();
-
-
+    private List<NYArea> areaList;
+    private String value1;
+    private String value2;
+    private String value3;
     private String[] values1 = {};
     private String[] values2 = {};
     private String[] values3 = {};
+    private WheelView wheelView1;
+    private WheelView wheelView2;
+    private WheelView wheelView3;
+    private INYWheelView3Hander hander;
+    private int index1 = 0;
+    private int index2 = 0;
+    private int index3 = 0;
 
-    int index1 = 0;
-    int index2 = 0;
-    int index3 = 0;
-
-    WheelView wheelView1;
-    WheelView wheelView2;
-    WheelView wheelView3;
-
-    String value1;
-    String value2;
-    String value3;
-
-    INYWheelView3Hander hander;
-
-    List<NYArea> areaList;
-
-    public NYWheelViewAreaList(Context context, String areaJsonObject,
+    public NYWheelViewAreaList(Context context, List<NYArea> areaList,
                                String v1, String v2, String v3, INYWheelView3Hander hander) {
-
-        parserArea(areaJsonObject);
+        this.areaList = areaList;
         this.value1 = v1;
         this.value2 = v2;
         this.value3 = v3;
-
         this.values1 = v1s();
         this.values2 = v2s(v1);
         this.values3 = v3s(v1, v2);
-
         view = LayoutInflater.from(context).inflate(R.layout.ny_view_wheel_view_3, null);
-
         this.wheelView1 = (WheelView) view.findViewById(R.id.wheelView1);
         this.wheelView2 = (WheelView) view.findViewById(R.id.wheelView2);
         this.wheelView3 = (WheelView) view.findViewById(R.id.wheelView3);
-
-        this.values1 = values1;
-        this.strsList2 = strsList2;
-        this.strsList3 = strsList3;
-        this.values2 = values2;
-        this.values3 = values3;
-
         this.hander = hander;
-
         initData(value1, value2, value3);
-
         resume();
     }
     private String[] v1s() {
@@ -154,24 +129,13 @@ public class NYWheelViewAreaList {
         return null;
     }
 
-    private void parserArea(String areaJson){
-        try {
-            List<NYArea> areaList = NYGsonParser.jsonStr2Object(areaJson, new TypeToken<List<NYArea>>() {
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * 如果UI显示有出问题，可以在Activity的onResume()中调用。
      */
     public void resume() {
-
         initWheelView1();
         initWheelView2();
         initWheelView3();
-
         setWheelViewChangingListener();
     }
 
@@ -226,13 +190,16 @@ public class NYWheelViewAreaList {
             @Override
             public void onChanged(WheelView wheel, int oldValue, int newValue) {
                 index1 = newValue;
+                value1 = values1[index1];
+                values2 = v2s(value1);
 
-                values2 = strsList2.get(index1);
                 index2 = 0;
+                value2 = values2[index2];
                 initWheelView2();
 
-                values3 = strsList3.get(index1).get(index2);
+                values3 = v3s(value1,value2);
                 index3 = 0;
+                value3 = values3[index3];
                 initWheelView3();
 
                 if (hander != null) {
@@ -244,9 +211,11 @@ public class NYWheelViewAreaList {
             @Override
             public void onChanged(WheelView wheel, int oldValue, int newValue) {
                 index2 = newValue;
+                value2 = values2[index2];
 
-                values3 = strsList3.get(index1).get(index2);
+                values3 = v3s(value1,value2);
                 index3 = 0;
+                value3 = values3[index3];
                 initWheelView3();
 
                 if (hander != null) {
@@ -258,6 +227,7 @@ public class NYWheelViewAreaList {
             @Override
             public void onChanged(WheelView wheel, int oldValue, int newValue) {
                 index3 = newValue;
+                value3 = values3[index3];
 
                 if (hander != null) {
                     hander.onChanging(values1[wheelView1.getCurrentItem()], values2[wheelView2.getCurrentItem()], values3[wheelView3.getCurrentItem()]);
