@@ -57,7 +57,6 @@ public class NYJson2JavaFileUtil {
                 s1 = item.attributeName.substring(1);
             }
             String fName = s0 + s1;
-            ;
 
             sb.append("\tpublic void set" + fName + "(" + item.className + " " + item.attributeName + "){\n");
             sb.append("\t\tthis." + item.attributeName + " = " + item.attributeName + ";\n");
