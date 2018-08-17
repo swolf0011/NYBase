@@ -13,6 +13,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class NYPermissionUtil {
      * 判断系统api版本大于等于23才走权限检查
      */
     public boolean isMNC() {
-        return Build.VERSION.SDK_INT >= 23;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
 
     /**
@@ -51,6 +52,9 @@ public class NYPermissionUtil {
      * @return
      */
     public boolean checkSelfPermission2requestPermissions(Activity activity,String[] permissions,int PERMISSION_requestCode) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true;
+        }
         boolean bool = true;
         List<String> list = new ArrayList<>();
         for (String str:permissions) {
@@ -77,6 +81,9 @@ public class NYPermissionUtil {
      * @return
      */
     public String[] checkSelfPermission(Activity activity,String[] permissions) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return null;
+        }
         boolean bool = true;
         List<String> list = new ArrayList<>();
         for (String str:permissions) {
@@ -95,20 +102,21 @@ public class NYPermissionUtil {
     }
 
 
-    public boolean onRequestPermissionsResult(int requestCode,
+    public void onRequestPermissionsResult(Activity activity,int requestCode,
                                               String[] permissions,
-                                              int[] grantResults,int PERMISSION_requestCode) {
-        boolean isGrantedAll = true;
-        if (requestCode == PERMISSION_requestCode) {
-            for (int grantResult : grantResults) {
-                if (grantResult != PackageManager.PERMISSION_GRANTED) {
-                    isGrantedAll = false;
-                    break;
-                }
-            }
-        }else{
-            isGrantedAll = false;
+                                              int[] grantResults,int PERMISSION_requestCode,IRequestPermissionsResultCallback callback) {
+        if (requestCode == PERMISSION_requestCode&&callback!=null) {
+            callback.hander();
+//            String[] temp_permissions = checkSelfPermission( activity, permissions);
+//            if(temp_permissions==null||temp_permissions.length==0){
+//
+//            }else{
+//                checkSelfPermission2requestPermissions(activity,permissions,int PERMISSION_requestCode)
+//            }
         }
-        return isGrantedAll;
+    }
+
+    public interface IRequestPermissionsResultCallback{
+        void hander();
     }
 }
