@@ -38,6 +38,7 @@ public class NYJson2JavaFileUtil {
 
         for (String item : myClassInfo.imports) {
             sb.append(item);
+            sb.append("\n");
         }
 
         sb.append("public class " + myClassInfo.className + "{\n");
@@ -58,15 +59,11 @@ public class NYJson2JavaFileUtil {
             }
             String fName = s0 + s1;
 
-            sb.append("\tpublic void set" + fName + "(" + item.className + " " + item.attributeName + "){\n");
-            sb.append("\t\tthis." + item.attributeName + " = " + item.attributeName + ";\n");
-            sb.append("\t}\n");
-            sb.append("\n");
+            sb.append("\tpublic void set" + fName + "(" + item.className + " " + item.attributeName + "){");
+            sb.append(" this." + item.attributeName + " = " + item.attributeName + "; }\n");
 
-            sb.append("\tpublic " + item.className + " get" + fName + "(){\n");
-            sb.append("\t\treturn " + item.attributeName + ";");
-            sb.append("\t}\n");
-            sb.append("\n");
+            sb.append("\tpublic " + item.className + " get" + fName + "(){");
+            sb.append(" return " + item.attributeName + "; }\n");
         }
 
 
