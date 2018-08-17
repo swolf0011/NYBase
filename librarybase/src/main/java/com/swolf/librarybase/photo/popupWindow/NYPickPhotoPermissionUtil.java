@@ -29,10 +29,8 @@ public class NYPickPhotoPermissionUtil {
         return NYPermissionUtil.getInstance().checkSelfPermission2requestPermissions(activity, my_permissions, PERMISSION_requestCode);
     }
 
-
-    public static boolean onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults, int PERMISSION_requestCode) {
-        return NYPermissionUtil.getInstance().onRequestPermissionsResult(requestCode,
-                permissions,
-                grantResults, PERMISSION_requestCode);
+    public static void onRequestPermissionsResult(Activity activity, int requestCode, String[] permissions, int[] grantResults, int PERMISSION_requestCode, NYPermissionUtil.IRequestPermissionsResultCallback callback) {
+        NYPermissionUtil.getInstance().onRequestPermissionsResult(activity,
+                requestCode, permissions, grantResults, PERMISSION_requestCode, callback);
     }
 }
