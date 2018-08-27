@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.header.librarybarcodescanner" >
+
+    <!-- 启动的手机硬件摄像头 -->
+    <uses-feature android:name="android.hardware.camera" />
+    <!-- 启动的手机硬件摄像头自动对焦 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <!-- 请求访问使用照相设备 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <application android:allowBackup="true" >
+        <activity android:name="com.header.librarybarcodescanner.NYSimpleScannerActivity">
+        </activity>
+    </application>
+</manifest>

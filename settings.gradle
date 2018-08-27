@@ -1,4 +1,4 @@
-include ':app', ':libraryhttp', ':librarygson',
+include ':app', ':libraryhttp', ':librarygson', ':librarybarcodescanner',
         ':librarybase',
         ':librarybluetooth',
         ':librarycontact',
