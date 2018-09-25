@@ -16,7 +16,7 @@ import com.swolf.librarybase.R;
  * Created by LiuYi-15973602714
  */
 public class NYPopupWindowUtil {
-    PopupWindow popupWindow;
+     PopupWindow popupWindow;
 
     public NYPopupWindowUtil() {
     }
@@ -50,7 +50,13 @@ public class NYPopupWindowUtil {
                                int yoff,
                                OnDismissListener listener) {
         initPopupWindow(view, width, height, -1, listener);
-        popupWindow.showAsDropDown(clickParentView, xoff, yoff);
+        int[] location = new int[2];
+        clickParentView.getLocationOnScreen(location);
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        int popupWidth = view.getMeasuredWidth();
+        int popupHeight = view.getMeasuredHeight();
+
+        popupWindow.showAsDropDown(clickParentView, location[0]+(clickParentView.getWidth()-popupWidth)/2 + xoff, yoff);
     }
 
     /**
@@ -66,8 +72,12 @@ public class NYPopupWindowUtil {
         initPopupWindow(view, width, height, -1, listener);
         int[] location = new int[2];
         clickParentView.getLocationOnScreen(location);
-        popupWindow.showAtLocation(clickParentView, Gravity.NO_GRAVITY, location[0] + xoff,
-                location[1] + yoff - view.getMeasuredHeight());
+
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        int popupWidth = view.getMeasuredWidth();
+        int popupHeight = view.getMeasuredHeight();
+        popupWindow.showAtLocation(clickParentView, Gravity.NO_GRAVITY, location[0]+(clickParentView.getWidth()-popupWidth)/2 + xoff,
+                location[1]-popupHeight+ yoff);
     }
 
     /**
