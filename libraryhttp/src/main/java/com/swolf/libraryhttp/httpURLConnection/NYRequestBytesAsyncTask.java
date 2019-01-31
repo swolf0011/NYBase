@@ -9,38 +9,34 @@ import java.util.HashMap;
  * Created by LiuYi-15973602714
  */
 public class NYRequestBytesAsyncTask extends AsyncTask<Void, Void, byte[]> {
-    // 后台服务接口地址
-    private String serviceUrl;
-    // 请求参数
+    private String urlStr;
+    private String paramJson;
     private HashMap<String, Object> paramMap;
-    // head参数
-    private HashMap<String, String> heads;
-    private String requestMethod;
+    private HashMap<String, String> headMap;
+    private EParamType paramType;
+    private EMethod method;
     private NYIAsyncTaskCallback callback;
 
-    /**
-     * @param serviceUrl
-     * @param paramMap
-     * @param heads
-     * @param requestMethod GET, POST, PATCH, DELETE, PUT, HEAD
-     * @param callback
-     */
-    public NYRequestBytesAsyncTask(String serviceUrl,
-                                   HashMap<String, Object> paramMap,
-                                   HashMap<String, String> heads,
-                                   String requestMethod,
-                                   NYIAsyncTaskCallback callback) {
+    public NYRequestBytesAsyncTask(String urlStr,
+                                    String paramJson,
+                                    HashMap<String, Object> paramMap,
+                                    HashMap<String, String> headMap,
+                                    EParamType paramType,
+                                    EMethod method,
+                                    NYIAsyncTaskCallback callback) {
         super();
-        this.serviceUrl = serviceUrl;
+        this.urlStr = urlStr;
+        this.paramJson = paramJson;
         this.paramMap = paramMap;
-        this.heads = heads;
-        this.requestMethod = requestMethod;
+        this.headMap = headMap;
+        this.paramType = paramType;
+        this.method = method;
         this.callback = callback;
     }
 
     @Override
     protected byte[] doInBackground(Void... voids) {
-        return NYURLConnectionUtil.getInstance().requestBytes(serviceUrl, paramMap, heads, requestMethod);
+        return NYURLConnectionUtil.getInstance().requestBytes(urlStr,paramJson, paramMap, headMap, paramType,method);
     }
 
     @Override

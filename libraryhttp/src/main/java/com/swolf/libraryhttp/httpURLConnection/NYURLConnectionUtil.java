@@ -29,29 +29,36 @@ public class NYURLConnectionUtil {
     private NYURLConnectionUtil() {
     }
 
-
     /**
      * postHttpURLConnection
-     *
-     * @param urlStr
-     * @param paramMap
-     * @param headMap
-     * @param requestMethod GET, POST, PATCH, DELETE, PUT, HEAD
      */
-    public HttpURLConnection httpURLConnection(String urlStr, HashMap<String, Object> paramMap, HashMap<String, String> headMap, String requestMethod) {
+    public HttpURLConnection httpURLConnection(String urlStr,
+                                               String paramJson,
+                                               HashMap<String, Object> paramMap,
+                                               HashMap<String, String> headMap,
+                                               EParamType paramType,
+                                               EMethod method) {
         HttpURLConnection conn = null;
         try {
             URL url = new URL(urlStr);
             conn = (HttpURLConnection) url.openConnection();
             if (conn != null) {
-                conn.setRequestMethod(requestMethod);
+                conn.setRequestMethod(method.toString());
                 conn.setConnectTimeout(connection_timeout);
-                conn.setReadTimeout(read_timeout);
+//                conn.setReadTimeout(read_timeout);
                 setHead(conn, headMap);
-                String paramStr = setParam(conn, paramMap);
-                if (paramStr.length() > 0) {
-                    byte[] bypes = paramStr.getBytes(charsetName);
-                    conn.getOutputStream().write(bypes);
+                if (EParamType.JSONStr.equals(paramType)) {
+                    conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+                    if (paramJson.length() > 0) {
+                        byte[] bypes = paramJson.getBytes(charsetName);
+                        conn.getOutputStream().write(bypes);
+                    }
+                }else{
+                    String paramStr = setParam(conn, paramMap);
+                    if (paramStr.length() > 0) {
+                        byte[] bypes = paramStr.getBytes(charsetName);
+                        conn.getOutputStream().write(bypes);
+                    }
                 }
                 conn.connect();
                 if (conn.getResponseCode() != 200) {
@@ -67,19 +74,19 @@ public class NYURLConnectionUtil {
 
     /**
      * request result String for json or xml
-     *
-     * @param urlStr
-     * @param paramMap
-     * @param headMap
-     * @param requestMethod GET, POST, PATCH, DELETE, PUT, HEAD
      * @return
      */
-    public String requestStr(String urlStr, HashMap<String, Object> paramMap, HashMap<String, String> headMap, String requestMethod) {
+    public String requestStr(String urlStr,
+                             String paramJson,
+                             HashMap<String, Object> paramMap,
+                             HashMap<String, String> headMap,
+                             EParamType paramType,
+                             EMethod method) {
         StringBuffer sb = null;
         HttpURLConnection conn = null;
         InputStream is = null;
         try {
-            conn = httpURLConnection(urlStr, paramMap, headMap, requestMethod);
+            conn = httpURLConnection(urlStr, paramJson,paramMap, headMap, paramType,method);
             if (conn != null) {
                 sb = new StringBuffer("");
                 byte[] bytes = new byte[1024 * 4];
@@ -100,21 +107,20 @@ public class NYURLConnectionUtil {
 
     /**
      * request result byte[]
-     *
-     * @param urlStr
-     * @param paramMap
-     * @param headMap
-     * @param requestMethod GET, POST, PATCH, DELETE, PUT, HEAD
-     * @return
      */
-    public byte[] requestBytes(String urlStr, HashMap<String, Object> paramMap, HashMap<String, String> headMap, String requestMethod) {
+    public byte[] requestBytes(String urlStr,
+                               String paramJson,
+                               HashMap<String, Object> paramMap,
+                               HashMap<String, String> headMap,
+                               EParamType paramType,
+                               EMethod method) {
         byte[] bytes = null;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         HttpURLConnection conn = null;
         InputStream is = null;
         int contentLength = -1;
         try {
-            conn = httpURLConnection(urlStr, paramMap, headMap, requestMethod);
+            conn = httpURLConnection(urlStr, paramJson,paramMap, headMap, paramType,method);
             if (conn != null) {
                 contentLength = conn.getContentLength();
                 is = conn.getInputStream();

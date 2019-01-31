@@ -13,35 +13,37 @@ import java.util.HashMap;
  * Created by LiuYi-15973602714
  */
 public class NYDownloadAsyncTask extends AsyncTask<Void, Integer, Boolean> {
-    // 后台服务接口地址
     private String urlStr;
-    // 请求参数
+    private String paramJson;
     private HashMap<String, Object> paramMap;
-    // head参数
     private HashMap<String, String> headMap;
-
-    private long beginIndex;
-    private IProgressCallback callback;
-    private boolean isNew;
+    private EParamType paramType;
+    private EMethod method;
     private String filePath;
     private long fileLength;
-    private String requestMethod;
+    private long beginIndex;
+    private boolean isNew;
 
+    private IProgressCallback callback;
 
     public NYDownloadAsyncTask(String urlStr,
+                               String paramJson,
                                HashMap<String, Object> paramMap,
                                HashMap<String, String> headMap,
-                               String requestMethod,
+                               EParamType paramType,
+                               EMethod method,
                                String filePath,
                                IProgressCallback callback) {
-        this(urlStr, paramMap, headMap, requestMethod, filePath, 0, 0, true, callback);
+        this(urlStr, paramJson, paramMap, headMap, paramType, method, filePath, 0, 0, true, callback);
     }
 
 
     public NYDownloadAsyncTask(String urlStr,
+                               String paramJson,
                                HashMap<String, Object> paramMap,
                                HashMap<String, String> headMap,
-                               String requestMethod,
+                               EParamType paramType,
+                               EMethod method,
                                String filePath,
                                long fileLength,
                                long beginIndex,
@@ -49,22 +51,26 @@ public class NYDownloadAsyncTask extends AsyncTask<Void, Integer, Boolean> {
                                IProgressCallback callback) {
         super();
         this.urlStr = urlStr;
+        this.paramJson = paramJson;
         this.paramMap = paramMap;
         this.headMap = headMap;
-        this.beginIndex = beginIndex;
-        this.callback = callback;
-        this.isNew = isNew;
+        this.paramType = paramType;
+        this.method = method;
         this.filePath = filePath;
         this.fileLength = fileLength;
-        this.requestMethod = requestMethod;
+        this.beginIndex = beginIndex;
+        this.isNew = isNew;
+        this.callback = callback;
     }
 
     @Override
     protected Boolean doInBackground(Void... voids) {
         if (fileLength > 0) {
-            return download(urlStr, paramMap, headMap, filePath, fileLength, beginIndex, isNew, requestMethod);
+            return download(urlStr, paramJson, paramMap, headMap,
+                    paramType, method, filePath, fileLength, beginIndex, isNew);
         } else {
-            return download(urlStr, paramMap, headMap, filePath, 0, 0, true, requestMethod);
+            return download(urlStr, paramJson, paramMap, headMap,
+                    paramType, method, filePath, 0, 0, true);
         }
     }
 
@@ -101,33 +107,31 @@ public class NYDownloadAsyncTask extends AsyncTask<Void, Integer, Boolean> {
     }
 
     /**
-     * @param urlStr
-     * @param paramMap
-     * @param headMap
-     * @param filePath
-     * @param fileLength
-     * @param beginIndex
-     * @param isNew
-     * @param requestMethod POST|GET
      * @return
      */
     @SuppressWarnings("resource")
-    private boolean download(String urlStr, HashMap<String, Object> paramMap, HashMap<String, String> headMap, String filePath, long fileLength, long beginIndex, boolean isNew, String requestMethod) {
+    private boolean download(
+            String urlStr,
+            String paramJson,
+            HashMap<String, Object> paramMap,
+            HashMap<String, String> headMap,
+            EParamType paramType,
+            EMethod method,
+            String filePath,
+            long fileLength,
+            long beginIndex,
+            boolean append) {
         InputStream is = null;
         FileOutputStream fos = null;
         HttpURLConnection conn = null;
         File file = new File(filePath);
-        if (isNew && file.exists()) {
-            file.delete();
-            beginIndex = 0;
-        }
         long size = beginIndex;
         if (fileLength > 0) {
             this.publishProgress((int) (size * 100 / fileLength));
         }
         try {
-            fos = new FileOutputStream(file);
-            conn = NYURLConnectionUtil.getInstance().httpURLConnection(urlStr, paramMap, headMap, requestMethod);
+            fos = new FileOutputStream(file,append);
+            conn = NYURLConnectionUtil.getInstance().httpURLConnection(urlStr, paramJson, paramMap, headMap, paramType, method);
             if (conn != null) {
                 byte[] bytes = new byte[1024 * 4];
                 is = conn.getInputStream();

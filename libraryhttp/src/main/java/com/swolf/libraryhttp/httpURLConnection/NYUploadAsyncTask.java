@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public class NYUploadAsyncTask extends AsyncTask<Void, Integer, String> {
     public int connection_timeout = 1000 * 30;// 连接超时
-    public int read_timeout = 1000 * 60;// 读取超时
+//    public int read_timeout = 1000 * 60;// 读取超时
     public String charsetName = "UTF-8";// 字符集
 
     // 后台服务接口地址
@@ -135,7 +135,7 @@ public class NYUploadAsyncTask extends AsyncTask<Void, Integer, String> {
             URL url = new URL(urlStr);
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST"); // 请求方式
-            conn.setReadTimeout(read_timeout);
+//            conn.setReadTimeout(read_timeout);
             conn.setConnectTimeout(connection_timeout);
             conn.setDoInput(true); // 允许输入流
             conn.setDoOutput(true); // 允许输出流
