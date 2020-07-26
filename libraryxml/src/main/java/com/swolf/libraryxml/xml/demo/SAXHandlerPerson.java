@@ -1,5 +1,4 @@
 package com.swolf.libraryxml.xml.demo;
-
 import java.util.ArrayList;
 
 import org.xml.sax.Attributes;
